@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Grid, Row, Col, Alert, FormGroup, ControlLabel, FormControl, HelpBlock,
 Navbar,Nav,NavItem,NavDropdown,MenuItem
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 
 class App extends Component {
@@ -68,9 +68,8 @@ class App extends Component {
           <Row className="show-grid">
             <Col xs={12} md={8}>
               <Alert bsStyle="warning">
-                <strong>Holy guacamole!</strong> Best check yo self, you're not looking too
-                good.
-            </Alert>;
+                <strong>Holy guacamole!</strong> Best check yo self, you're not 
+            </Alert>
             </Col>
             <Col xs={6} md={4}>
               <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
@@ -114,7 +113,7 @@ class App extends Component {
               <code>&lt;{'Col md={6} mdPull={6}'} /&gt;</code>
             </Col>
           </Row>
-        </Grid>;
+        </Grid>
       </div>
     );
   }
