@@ -30,7 +30,7 @@ class App extends Component {
     }).then(() => {
       // Display loaded commands in the console
       // console.log(Jarvis.getAvailableCommands());
-      //Jarvis.say("marika");
+      //Jarvis.say("hola mundo");
     }).catch((err) => {
       console.error("Oopsy daisy, this shouldn't happen !", err);
     });
@@ -57,7 +57,19 @@ class App extends Component {
 
 
   handleClick = () => {
-    if (this.isValidated()) Jarvis.say(this.state.value);
+    //var self = this;
+    if (this.isValidated()) {
+      Jarvis.say(this.state.value, {
+        onStart: () => {
+          console.log("Comenzando a leer texto");
+        },
+        onEnd: () => {
+          console.log("Texto leido satisfactoriamente");
+          this.setState({ 'value': '' });
+        }
+      });
+
+    }
   }
 
   render() {
