@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import { Grid, Row, Col, Alert, FormGroup, ControlLabel, FormControl, HelpBlock,
-Navbar,Nav,NavItem,NavDropdown,MenuItem
+import {
+  Grid, Row, Col, Alert, FormGroup, ControlLabel, FormControl, HelpBlock,
+  Navbar, Nav, NavItem, NavDropdown, MenuItem, Button
 } from 'react-bootstrap';
 
+import Artyom from 'artyom.js';
+//import {  } from "art";
+const Jarvis = new Artyom();
 
 class App extends Component {
 
@@ -14,6 +18,24 @@ class App extends Component {
       value: ''
     };
   }
+
+  componentDidMount() {
+
+    Jarvis.initialize({
+      lang: "es-ES",
+      debug: false,
+      continuous: false,
+      soundex: false,
+      listen: false
+    }).then(() => {
+      // Display loaded commands in the console
+      // console.log(Jarvis.getAvailableCommands());
+      //Jarvis.say("marika");
+    }).catch((err) => {
+      console.error("Oopsy daisy, this shouldn't happen !", err);
+    });
+  }
+
 
   getValidationState = () => {
     const length = this.state.value.length;
@@ -25,6 +47,17 @@ class App extends Component {
 
   handleChange = (e) => {
     this.setState({ value: e.target.value });
+  }
+
+  isValidated = () => {
+    const length = this.state.value.length;
+    if (length > 10) return true;
+    return false;
+  }
+
+
+  handleClick = () => {
+    if (this.isValidated()) Jarvis.say(this.state.value);
   }
 
   render() {
@@ -64,11 +97,11 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-        <Grid>
+        <Grid fluid={true}>
           <Row className="show-grid">
             <Col xs={12} md={8}>
               <Alert bsStyle="warning">
-                <strong>Holy guacamole!</strong> Best check yo self, you're not 
+                <strong>Holy guacamole!</strong> Best check yo self, you're not
             </Alert>
             </Col>
             <Col xs={6} md={4}>
@@ -87,12 +120,18 @@ class App extends Component {
                   <FormControl
                     type="text"
                     value={this.state.value}
-                    placeholder="Enter text"
+                    placeholder="Escribe tu texto en español aqui"
                     onChange={this.handleChange}
                   />
                   <FormControl.Feedback />
                   <HelpBlock>Validation is based on string length.</HelpBlock>
                 </FormGroup>
+                <Button
+                  bsStyle="primary"
+                  onClick={this.handleClick}
+                >
+                  LEER
+                </Button>
               </form>
 
             </Col>
